@@ -72,8 +72,11 @@ function builder (saw, xs) {
         };
         
         cb.ok = cb.bind(cb, null);
-        
-        f.apply(cb, context.stack);
+        try {
+            f.apply(cb, context.stack);
+        } catch(err) {
+            cb(err);
+        }
     }
     
     var running = 0;
